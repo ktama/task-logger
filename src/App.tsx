@@ -1,20 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { listen } from '@tauri-apps/api/event'
+import dayjs from 'dayjs'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [nowStr, getNow] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'));
+
+  useEffect(() => {
+    let unlisten: any;
+    async function getDate() {
+      unlisten = await listen('get-date', event => {
+        console.log(`get-date ${event.payload} ${new Date()}`)
+        getNow(dayjs().format('YYYY-MM-DD HH:mm:ss'));
+      });
+    }
+    getDate();
+
+    return () => {
+      if (unlisten) {
+        unlisten();
+      }
+    }
+  }, [])
+
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
+        <p>{nowStr}</p>
+      </header>
+      <body className='App-body'>
+        <p>Body</p>
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
@@ -37,7 +55,7 @@ function App() {
             Vite Docs
           </a>
         </p>
-      </header>
+      </body>
     </div>
   )
 }
