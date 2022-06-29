@@ -15,3 +15,6 @@ npm create tauri-app
 ? Which vite template would you like to use? react-ts
 ```
 
+## Reference
+
+[React Table を TypeScript で使う - Qiita](https://qiita.com/kurab/items/93c56277451e96f2b1eb)
