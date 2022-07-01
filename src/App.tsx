@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Column } from 'react-table';
-import { Data, DataButton } from './types/DataType';
+import { Data, TaskData } from './types/DataType';
 import './App.css';
 import { listen } from '@tauri-apps/api/event';
 import dayjs from 'dayjs';
 import TaskTable from './components/TaskTable';
-import PrimaryButton from './components/PrimaryButton';
 
 function App() {
   const [nowStr, getNow] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'));
@@ -27,36 +26,68 @@ function App() {
     }
   }, [])
 
-  const onClickAlert = (name: string) => {
-    alert(name);
-  };
-  const dataButton: Array<DataButton> = useMemo(
+  const taskData: Array<TaskData> = useMemo(
     () => [
       {
-        col1: 'Hello',
-        col2: <PrimaryButton name={'hello'} callback={onClickAlert} />,
+        num: 1,
+        key: 111,
+        project: 'AAA',
+        category: 'A',
+        task: 'TaskA',
+        // start: new Date(2022, 1, 1),
+        // end: new Date(2022, 1, 2),
       },
       {
-        col1: 'react-table',
-        col2: <PrimaryButton name={'react-table'} callback={onClickAlert} />,
+        num: 2,
+        key: 222,
+        project: 'BBB',
+        category: 'B',
+        task: 'TaskB1',
+        // start: new Date(2022, 2, 1),
+        // end: new Date(2022, 2, 2),
       },
       {
-        col1: 'whatever',
-        col2: <PrimaryButton name={'whatever'} callback={onClickAlert} />,
+        num: 2,
+        key: 222,
+        project: 'BBB',
+        category: 'B',
+        task: 'TaskB2',
+        // start: new Date(2022, 2, 5),
+        // end: new Date(2022, 2, 10),
       },
     ],
     []
   );
-  const columnsButton: Array<Column<DataButton>> = useMemo(
+  const columnsTask: Array<Column<TaskData>> = useMemo(
     () => [
       {
-        Header: 'Column 1',
-        accessor: 'col1',
+        Header: 'Num',
+        accessor: 'num',
       },
       {
-        Header: 'Column 2',
-        accessor: 'col2',
+        Header: 'Key',
+        accessor: 'key',
       },
+      {
+        Header: 'Project',
+        accessor: 'project',
+      },
+      {
+        Header: 'Category',
+        accessor: 'category',
+      },
+      {
+        Header: 'Task',
+        accessor: 'task',
+      },
+      // {
+      //   Header: 'Start',
+      //   accessor: 'start',
+      // },
+      // {
+      //   Header: 'End',
+      //   accessor: 'end',
+      // },
     ],
     []
   );
@@ -64,16 +95,31 @@ function App() {
   const data: Array<Data> = useMemo(
     () => [
       {
-        col1: 'Hello',
-        col2: 'World',
+        num: 1,
+        key: 111,
+        project: 'AAA',
+        category: 'A',
+        task: 'TaskA',
+        // start: new Date(2022, 1, 1),
+        // end: new Date(2022, 1, 2),
       },
       {
-        col1: 'react-table',
-        col2: 'rocks',
+        num: 2,
+        key: 222,
+        project: 'BBB',
+        category: 'B',
+        task: 'TaskB1',
+        // start: new Date(2022, 2, 1),
+        // end: new Date(2022, 2, 2),
       },
       {
-        col1: 'whatever',
-        col2: 'you want',
+        num: 2,
+        key: 222,
+        project: 'BBB',
+        category: 'B',
+        task: 'TaskB2',
+        // start: new Date(2022, 2, 5),
+        // end: new Date(2022, 2, 10),
       },
     ],
     []
@@ -81,13 +127,33 @@ function App() {
   const columns: Array<Column<Data>> = useMemo(
     () => [
       {
-        Header: 'Column 1',
-        accessor: 'col1',
+        Header: 'Num',
+        accessor: 'num',
       },
       {
-        Header: 'Column 2',
-        accessor: 'col2',
+        Header: 'Key',
+        accessor: 'key',
       },
+      {
+        Header: 'Project',
+        accessor: 'project',
+      },
+      {
+        Header: 'Category',
+        accessor: 'category',
+      },
+      {
+        Header: 'Task',
+        accessor: 'task',
+      },
+      // {
+      //   Header: 'Start',
+      //   accessor: 'start',
+      // },
+      // {
+      //   Header: 'End',
+      //   accessor: 'end',
+      // },
     ],
     []
   );
@@ -98,7 +164,7 @@ function App() {
       </header>
       <body className='App-body'>
         <p>Body</p>
-        <TaskTable columns={columnsButton} data={dataButton} />
+        <TaskTable columns={columnsTask} data={taskData} />
       </body>
     </div>
   )

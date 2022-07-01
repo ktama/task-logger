@@ -1,16 +1,16 @@
 import React from 'react';
 import { useSortBy, Column, useTable } from 'react-table';
-import { DataButton } from '../types/DataType';
+import { TaskData } from '../types/DataType';
 
 const TaskTable = ({
     columns,
     data,
 }: {
-    columns: Column<DataButton>[];
-    data: DataButton[];
+    columns: Column<TaskData>[];
+    data: TaskData[];
 }) => {
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-        useTable<DataButton>({ columns, data }, useSortBy);
+        useTable<TaskData>({ columns, data }, useSortBy);
     return (
         <>
             <table {...getTableProps()}>

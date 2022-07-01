@@ -1,9 +1,19 @@
 export type Data = {
-    col1: string;
-    col2: string;
-};
+    num: number;
+    key: number;
+    project: string;
+    category: string;
+    task: string;
+    // start: Date;
+    // end: Date;
+}
 
-export type DataButton = {
-    col1: string;
-    col2: JSX.Element;
+export type TaskData = {
+    num: number;
+    key: number;
+    project: string;
+    category: string;
+    task: string;
+    // start: Date;
+    // end: Date;
 };
