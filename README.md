@@ -18,3 +18,6 @@ npm create tauri-app
 ## Reference
 
 [React Table を TypeScript で使う - Qiita](https://qiita.com/kurab/items/93c56277451e96f2b1eb)
+
+[React Example: Editable Data](https://tanstack.com/table/v8/docs/examples/react/editable-data?from=reactTableV7)
+
